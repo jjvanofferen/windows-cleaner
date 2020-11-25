@@ -1,9 +1,6 @@
 import os, shutil, ctypes, tkinter
 from subprocess import check_output
 
-#this will auto update the system every time it's used!
-output = check_output("git pull", shell=True).decode()
-
 
 rootpath = "C:/Users/" + os.getlogin()+ "/Downloads"
 
