@@ -1,0 +1,15 @@
+paths:
+  images:
+    jpg:
+      - "C:\Users\{osuser}\Pictures\Saved Pictures"
+    png:
+      - "C:\Users\{osuser}\Pictures\Saved Pictures"
+  documents:
+    doc: 
+      - "C:\Users\{osuser}\Documents"
+    pdf: 
+      - "C:\Users\{osuser}\Documents"
+delete:
+    - '.exe'
+    - '.rar'
+    - '.zip'
