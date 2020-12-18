@@ -32,7 +32,7 @@ file_list_column = [
 
 # For now will only show the name of the file that was chosen
 image_viewer_column = [
-    [sg.Text("Choose an image from list on left:")],
+    [sg.Text("Review files on the left before running the cleaner:")],
     [sg.Text(size=(40, 1), key="-TOUT-")],
     [sg.Image(key="-IMAGE-")],
     [sg.Button("Run cleaner", enable_events=True, key="cleanup")]
@@ -67,12 +67,31 @@ while True:
                     if file.endswith(extension):
                         shutil.move(os.path.join(values["-FOLDER-"], file), os.path.join(pathing, file))
 
+        print("Finished cleaning folder")
+
+        folder = values["-FOLDER-"]
+        file_list = os.listdir()
+        extensions = list()
+
+        for item in data['paths']:
+            for extension in data['paths'][item]:
+                extensions.append(extension)
+
+        fnames = [
+            f
+            for f in file_list
+            if os.path.isfile(os.path.join(folder, f))
+            and f.lower().endswith(tuple(extensions))
+        ]
+        window["-FILE LIST-"].update(fnames)
+
     # Folder name was filled in, make a list of files in the folder
     if event == "-FOLDER-":
         folder = values["-FOLDER-"]
         try:
             # Get list of files in folder
             file_list = os.listdir(folder)
+
         except:
             file_list = []
 
@@ -80,9 +99,8 @@ while True:
 
         for item in data['paths']:
             for extension in data['paths'][item]:
-                extensions = extensions + extension
+                extensions.append(extension)
 
-        print(extensions)
         fnames = [
             f
             for f in file_list
